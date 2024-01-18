@@ -22,6 +22,9 @@ class NewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: lightTheme(),
+      darkTheme: darkTheme(),
+      themeMode: ThemeMode.dark,
       home: BlocProvider<NewsCubit>(
         create: (context) => NewsCubit(),
         child: BlocConsumer<NewsCubit, NewsStates>(

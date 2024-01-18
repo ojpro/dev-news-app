@@ -5,11 +5,12 @@ import 'package:news_app/src/news/presentation/manager/news_cubit.dart';
 class BottomNavigationBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> items;
   final double elevation;
-  final Color backgroundColor;
+  final Color? backgroundColor;
   final bool showUnselectedLabels;
+  final bool enableFeedback;
   final bool showSelectedLabels;
-  final Color unselectedItemColor;
-  final Color selectedItemColor;
+  final Color? unselectedItemColor;
+  final Color? selectedItemColor;
   final double iconSize;
   final int currentIndex;
   final Function onTapPressed;
@@ -19,11 +20,12 @@ class BottomNavigationBarComponent extends StatelessWidget {
     required this.items,
     this.currentIndex = 0,
     this.elevation = 0.0,
-    this.backgroundColor = Colors.white,
+    this.enableFeedback = false,
+    this.backgroundColor,
     this.showUnselectedLabels = false,
     this.showSelectedLabels = false,
-    this.unselectedItemColor = Colors.grey,
-    this.selectedItemColor = Colors.black,
+    this.unselectedItemColor,
+    this.selectedItemColor,
     this.iconSize = 24,
     required this.onTapPressed,
   });
@@ -41,7 +43,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
       selectedItemColor: selectedItemColor,
       iconSize: iconSize,
       currentIndex: newsCubit.currentScreenId,
-      enableFeedback: false,
+      enableFeedback: enableFeedback,
       items: items,
       onTap: (index) => onTapPressed(index) ?? (index) {},
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news_app/core/common/styles/themes.dart';
 
 import '../core/common/components/icon.dart';
 import '../core/common/layouts/basic_layout.dart';
@@ -33,13 +34,10 @@ class NewsApp extends StatelessWidget {
             NewsCubit newsCubit = NewsCubit.get(context);
             return BasicLayout(
               title: 'News App',
-              actions: [
-                IconButton(
-                  onPressed: null,
-                  icon: iconComponent(
-                    icon: Icons.settings_rounded,
-                  ),
-                )
+              actions: const [
+                Icon(
+                  Icons.settings_rounded,
+                ),
               ],
               bottomNavigationBarItems: _bottomNavigationItems(),
               onBottomNavBarTapPressed: (index) {
@@ -64,7 +62,6 @@ class NewsApp extends StatelessWidget {
           label: label,
           activeIcon: Icon(
             activeIcon,
-            color: Colors.black87,
           ),
           icon: Icon(icon),
         );

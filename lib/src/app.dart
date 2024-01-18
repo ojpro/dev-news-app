@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/common/styles/themes.dart';
+import 'package:news_app/src/news/presentation/screens/archived_screen.dart';
+import 'package:news_app/src/news/presentation/screens/favorite_screen.dart';
+import 'package:news_app/src/news/presentation/screens/news_screen.dart';
 
-import '../core/common/components/icon.dart';
 import '../core/common/layouts/basic_layout.dart';
 import 'news/presentation/manager/news_cubit.dart';
 import 'news/presentation/manager/news_states.dart';
-import 'news/presentation/pages/archived_page.dart';
-import 'news/presentation/pages/favorite_page.dart';
-import 'news/presentation/pages/news_page.dart';
+
 
 class NewsApp extends StatelessWidget {
   final List<Widget> screensList = const [
-    NewsPage(),
-    FavoritePage(),
-    ArchivedPage(),
+    NewsScreen(),
+    FavoriteScreen(),
+    ArchivedScreen(),
   ];
 
   const NewsApp({super.key});

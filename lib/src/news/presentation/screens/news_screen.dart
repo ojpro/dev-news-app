@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:news_app/core/common/components/box.dart';
 import 'package:news_app/core/common/components/text.dart';
 
-class NewsPage extends StatelessWidget {
-  const NewsPage({super.key});
+class NewsScreen extends StatelessWidget {
+  const NewsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

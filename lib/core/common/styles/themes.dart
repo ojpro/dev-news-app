@@ -6,6 +6,9 @@ ThemeData lightTheme({
   Color appBarTitleColor = Colors.black,
 }) =>
     ThemeData(
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Colors.white),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: appBarBackground,
         titleTextStyle: TextStyle(
@@ -31,13 +34,15 @@ ThemeData lightTheme({
       ),
     );
 
-
 ThemeData darkTheme({
   Color scaffoldBackgroundColor = Colors.black,
   Color appBarBackground = Colors.black,
   Color appBarTitleColor = Colors.white,
 }) =>
     ThemeData(
+      textTheme: const TextTheme(
+        bodyMedium: TextStyle(color: Colors.white),
+      ),
       appBarTheme: AppBarTheme(
         backgroundColor: appBarBackground,
         titleTextStyle: TextStyle(

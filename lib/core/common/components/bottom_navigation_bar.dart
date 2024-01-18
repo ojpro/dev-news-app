@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/news/presentation/manager/news_cubit.dart';
-import 'package:news_app/src/news/presentation/manager/news_states.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> items;
@@ -12,7 +11,8 @@ class BottomNavigationBarComponent extends StatelessWidget {
   final Color unselectedItemColor;
   final Color selectedItemColor;
   final double iconSize;
-  final int? currentIndex;
+  final int currentIndex;
+  final Function onTapPressed;
 
   const BottomNavigationBarComponent({
     super.key,
@@ -25,34 +25,25 @@ class BottomNavigationBarComponent extends StatelessWidget {
     this.unselectedItemColor = Colors.grey,
     this.selectedItemColor = Colors.black,
     this.iconSize = 24,
+    required this.onTapPressed,
   });
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => NewsCubit(),
-      child: BlocConsumer<NewsCubit, NewsStates>(
-        builder: (BuildContext context, NewsStates state) {
-          NewsCubit newsCubit = NewsCubit.get(context);
+    NewsCubit newsCubit = context.read<NewsCubit>();
 
-          return BottomNavigationBar(
-            elevation: elevation,
-            backgroundColor: backgroundColor,
-            showUnselectedLabels: showUnselectedLabels,
-            showSelectedLabels: showSelectedLabels,
-            unselectedItemColor: unselectedItemColor,
-            selectedItemColor: selectedItemColor,
-            iconSize: iconSize,
-            currentIndex: newsCubit.currentScreenId,
-            enableFeedback: false,
-            items: items,
-            onTap: (index) {
-              newsCubit.changeCurrentScreenId(index);
-            },
-          );
-        },
-        listener: (BuildContext context, NewsStates state) => {},
-      ),
+    return BottomNavigationBar(
+      elevation: elevation,
+      backgroundColor: backgroundColor,
+      showUnselectedLabels: showUnselectedLabels,
+      showSelectedLabels: showSelectedLabels,
+      unselectedItemColor: unselectedItemColor,
+      selectedItemColor: selectedItemColor,
+      iconSize: iconSize,
+      currentIndex: newsCubit.currentScreenId,
+      enableFeedback: false,
+      items: items,
+      onTap: (index) => onTapPressed(index) ?? (index) {},
     );
   }
 }

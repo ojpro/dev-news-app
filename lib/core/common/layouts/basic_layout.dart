@@ -8,14 +8,16 @@ class BasicLayout extends StatelessWidget {
   final Widget? child;
   final Color statusBarColor;
   final List<BottomNavigationBarItem>? bottomNavigationBarItems;
+  Function(int)? onBottomNavBarTapPressed;
 
-  const BasicLayout({
+   BasicLayout({
     super.key,
     required this.title,
     this.actions,
     this.child,
     this.statusBarColor = Colors.black,
     this.bottomNavigationBarItems,
+     this.onBottomNavBarTapPressed,
   });
 
   @override
@@ -26,6 +28,7 @@ class BasicLayout extends StatelessWidget {
           statusBarColor: statusBarColor,
         ),
         child: Scaffold(
+          extendBody: true,
           appBar: AppBar(
             title: Text(title),
             actions: actions,
@@ -34,6 +37,7 @@ class BasicLayout extends StatelessWidget {
           bottomNavigationBar: bottomNavigationBarItems == null
               ? null
               : BottomNavigationBarComponent(
+                  onTapPressed: (index) => onBottomNavBarTapPressed!(index),
                   items: bottomNavigationBarItems ?? [],
                 ),
         ),

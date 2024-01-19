@@ -26,7 +26,7 @@ class NewsScreen extends StatelessWidget {
                     ),
                     borderRadius: 24,
                     backgroundColor: Colors.purple,
-                    padding: [4, 8, 4, 8],
+                    padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   ),
                 ],
               ),

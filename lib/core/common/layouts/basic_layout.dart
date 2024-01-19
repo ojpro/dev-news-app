@@ -9,15 +9,18 @@ class BasicLayout extends StatelessWidget {
   final Color statusBarColor;
   final List<BottomNavigationBarItem>? bottomNavigationBarItems;
   Function(int)? onBottomNavBarTapPressed;
+  final bool? centerTitle;
 
-   BasicLayout({
+
+  BasicLayout({
     super.key,
     required this.title,
     this.actions,
     this.child,
     this.statusBarColor = Colors.black,
     this.bottomNavigationBarItems,
-     this.onBottomNavBarTapPressed,
+    this.onBottomNavBarTapPressed,
+    this.centerTitle = false,
   });
 
   @override
@@ -31,6 +34,7 @@ class BasicLayout extends StatelessWidget {
           extendBody: true,
           appBar: AppBar(
             title: Text(title),
+            centerTitle: centerTitle,
             actions: actions,
           ),
           body: child,

@@ -6,8 +6,35 @@ ThemeData lightTheme({
   Color appBarTitleColor = Colors.black,
 }) =>
     ThemeData(
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.white;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            return Colors.white;
+          }
+          return Colors.blueAccent;
+        }),
+        trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.blueAccent;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            return Colors.white;
+          }
+          return Colors.white;
+        }),
+        overlayColor: MaterialStateProperty.all(
+          Colors.blueAccent,
+        ),
+        trackOutlineColor: MaterialStateProperty.all(
+          Colors.blueAccent,
+        ),
+        splashRadius: 20,
+      ),
       textTheme: const TextTheme(
-        bodyMedium: TextStyle(color: Colors.white),
+        bodyMedium: TextStyle(color: Colors.black),
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: appBarBackground,
@@ -17,6 +44,9 @@ ThemeData lightTheme({
           fontWeight: FontWeight.w500,
         ),
         actionsIconTheme: const IconThemeData(
+          color: Colors.black54,
+        ),
+        iconTheme: const IconThemeData(
           color: Colors.black54,
         ),
       ),
@@ -40,6 +70,33 @@ ThemeData darkTheme({
   Color appBarTitleColor = Colors.white,
 }) =>
     ThemeData(
+      switchTheme: SwitchThemeData(
+        thumbColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.white;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            return Colors.white;
+          }
+          return Colors.blueAccent;
+        }),
+        trackColor: MaterialStateProperty.resolveWith((Set<MaterialState> states) {
+          if (states.contains(MaterialState.selected)) {
+            return Colors.blueAccent;
+          }
+          if (states.contains(MaterialState.disabled)) {
+            return Colors.white;
+          }
+          return Colors.white;
+        }),
+        overlayColor: MaterialStateProperty.all(
+          Colors.blueAccent,
+        ),
+        trackOutlineColor: MaterialStateProperty.all(
+          Colors.blueAccent,
+        ),
+        splashRadius: 20,
+      ),
       textTheme: const TextTheme(
         bodyMedium: TextStyle(color: Colors.white),
       ),
@@ -51,6 +108,9 @@ ThemeData darkTheme({
           fontWeight: FontWeight.w500,
         ),
         actionsIconTheme: IconThemeData(
+          color: Colors.grey.shade200,
+        ),
+        iconTheme: IconThemeData(
           color: Colors.grey.shade200,
         ),
       ),

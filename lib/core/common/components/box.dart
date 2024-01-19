@@ -2,18 +2,15 @@ import 'package:flutter/material.dart';
 
 Widget boxComponent({
   required Widget child,
-  List<double> padding = const [0, 0, 0, 0],
-  Color backgroundColor = Colors.black,
+  EdgeInsets? padding,
+  Color? backgroundColor,
   double borderRadius = 0,
+  List<BoxShadow>? boxShadow,
 }) =>
     Container(
-      padding: EdgeInsetsDirectional.only(
-        top: padding[0],
-        end: padding[1],
-        bottom: padding[2],
-        start: padding[3],
-      ),
+      padding: padding,
       decoration: BoxDecoration(
+        boxShadow: boxShadow,
         color: backgroundColor,
         borderRadius: BorderRadius.circular(
           borderRadius,

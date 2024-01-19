@@ -1,10 +1,11 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/src/news/presentation/manager/news_states.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
   // Properties
   int currentScreenId = 0;
+  bool isDarkEnabled = false;
 
   // Class Related Methods
   NewsCubit() : super(NewsInitState());
@@ -24,9 +25,7 @@ class NewsCubit extends Cubit<NewsStates> {
 
   // Change App Theme
   void changeTheme(bool enabledDark) {
-    emit(AppThemeChangedState(enabledDark));
+    isDarkEnabled = enabledDark;
+    emit(AppThemeChangedState());
   }
-
-  // Get Current Theme State
-  bool getCurrentTheme() => AppThemeChangedState.isDarkEnabled;
 }

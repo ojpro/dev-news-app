@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:news_app/src/app.dart';
 
-class NewsStates {}
+abstract class AppStates {
+  const AppStates();
+}
 
-class NewsInitState extends NewsStates {}
+class AppInitState extends AppStates {}
 
 // # App
 
 // Screens
-class AppScreenChangedState extends NewsStates {
+class AppScreenChangedState extends AppStates {
   static Widget nextScreen = const NewsApp();
 
   AppScreenChangedState(Widget screen) {
@@ -17,8 +19,7 @@ class AppScreenChangedState extends NewsStates {
 }
 
 // Bottom Navigation
-class BottomNavigationBarStateChangedState extends NewsStates {}
+class BottomNavigationBarStateChangedState extends AppStates {}
 
 // Theme
-
-class AppThemeChangedState extends NewsStates {}
+class AppThemeChangedState extends AppStates {}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/news/presentation/manager/news_cubit.dart';
-import 'package:news_app/src/news/presentation/manager/news_states.dart';
+import 'package:news_app/core/bloc/app_cubit.dart';
+import 'package:news_app/core/bloc/app_states.dart';
 import 'package:news_app/src/news/presentation/screens/settings_screen.dart';
 
 import '../../../../core/common/layouts/basic_layout.dart';
@@ -21,7 +21,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<NewsCubit, NewsStates>(
+    return BlocConsumer<AppCubit, AppStates>(
       listener: (context, state) {
         if (state is AppScreenChangedState) {
           Navigator.push(
@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        NewsCubit newsCubit = NewsCubit.get(context);
+        AppCubit newsCubit = AppCubit.get(context);
         return BasicLayout(
           title: 'News App',
           actions: [

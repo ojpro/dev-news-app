@@ -31,7 +31,6 @@ class BasicLayout extends StatelessWidget {
           statusBarColor: statusBarColor,
         ),
         child: Scaffold(
-          extendBody: true,
           appBar: AppBar(
             title: Text(title),
             centerTitle: centerTitle,

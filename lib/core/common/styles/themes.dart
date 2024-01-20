@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app/core/common/styles/colors.dart';
 
 ThemeData lightTheme({
   Color scaffoldBackgroundColor = Colors.white,
@@ -61,6 +62,9 @@ ThemeData lightTheme({
         selectedIconTheme: IconThemeData(
           color: Colors.black54,
         ),
+      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: ColorsPalette.buttonBackground,
       ),
     );
 
@@ -125,5 +129,8 @@ ThemeData darkTheme({
         selectedIconTheme: IconThemeData(
           color: Colors.grey.shade500,
         ),
+      ),
+      progressIndicatorTheme: const ProgressIndicatorThemeData(
+        color: ColorsPalette.buttonBackground,
       ),
     );

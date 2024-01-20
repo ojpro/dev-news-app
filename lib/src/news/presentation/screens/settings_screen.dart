@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/common/components/box.dart';
 import 'package:news_app/core/common/layouts/basic_layout.dart';
-import 'package:news_app/src/news/presentation/manager/news_cubit.dart';
-import 'package:news_app/src/news/presentation/manager/news_states.dart';
+import 'package:news_app/core/bloc/app_cubit.dart';
+import 'package:news_app/core/bloc/app_states.dart';
 
 class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<NewsCubit, NewsStates>(
+    return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        NewsCubit newsCubit = NewsCubit.get(context);
+        AppCubit newsCubit = AppCubit.get(context);
 
         return BasicLayout(
           title: 'Settings',

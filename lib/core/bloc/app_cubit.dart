@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/src/news/presentation/manager/news_states.dart';
+import 'package:news_app/core/bloc/app_states.dart';
 
-class NewsCubit extends Cubit<NewsStates> {
+class AppCubit extends Cubit<AppStates> {
   // Properties
   int currentScreenId = 0;
   bool isDarkEnabled = false;
 
   // Class Related Methods
-  NewsCubit() : super(NewsInitState());
+  AppCubit() : super(AppInitState());
 
-  static NewsCubit get(context) => BlocProvider.of(context);
+  static AppCubit get(context) => BlocProvider.of(context);
 
   // Public use methods
   void changeCurrentScreenId(int id) {

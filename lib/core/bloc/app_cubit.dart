@@ -5,7 +5,7 @@ import 'package:news_app/core/bloc/app_states.dart';
 class AppCubit extends Cubit<AppStates> {
   // Properties
   int currentScreenId = 0;
-  bool isDarkEnabled = false;
+  bool isDarkEnabled = true;
 
   // Class Related Methods
   AppCubit() : super(AppInitState());

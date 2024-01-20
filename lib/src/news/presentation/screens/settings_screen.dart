@@ -10,7 +10,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppCubit, AppStates>(
       builder: (context, state) {
-        AppCubit newsCubit = AppCubit.get(context);
+        AppCubit appCubit = AppCubit.get(context);
 
         return BasicLayout(
           title: 'Settings',
@@ -35,9 +35,9 @@ class SettingsScreen extends StatelessWidget {
                         ),
                       ),
                       Switch(
-                        value: newsCubit.isDarkEnabled,
+                        value: appCubit.isDarkEnabled,
                         onChanged: (value) {
-                          newsCubit.changeTheme(value);
+                          appCubit.changeTheme(value);
                         },
                       ),
                     ],

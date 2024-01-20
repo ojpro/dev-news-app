@@ -7,7 +7,7 @@ class NewsUseCase {
 
   NewsUseCase({required this.repository});
 
-  Future<List<NewsEntity>> getNews() async {
-    return await repository.getNews();
+  Future<List<NewsEntity>> getNews(String? category) async {
+    return await repository.getNews(category);
   }
 }

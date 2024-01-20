@@ -9,10 +9,10 @@ class NewsRepositoryImpl implements NewsRepository{
   NewsRepositoryImpl({required this.remoteDataSource});
 
   @override
-  Future<List<NewsEntity>> getNews() async {
+  Future<List<NewsEntity>> getNews(String? category) async {
 
    try{
-     final List<Map<String, dynamic>> newsData = await remoteDataSource.fetchNews();
+     final List<Map<String, dynamic>> newsData = await remoteDataSource.fetchNews(category);
 
      final List<NewsEntity> newsEntityList = newsData.map<NewsEntity>((dynamic data) => NewsEntity.fromMap(data as Map<String, dynamic>)).toList();
 

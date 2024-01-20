@@ -5,9 +5,9 @@ class NewsRemoteDataSource {
 
   NewsRemoteDataSource({required this.apiService});
 
-  Future<List<Map<String, dynamic>>> fetchNews() async {
+  Future<List<Map<String, dynamic>>> fetchNews(String? category) async {
     try {
-      final response = await apiService.getNews();
+      final response = await apiService.getNews(category);
 
       if (response != null && response.statusCode == 200) {
         final responseData = (response.data as List<dynamic>)

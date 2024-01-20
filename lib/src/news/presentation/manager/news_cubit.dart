@@ -9,29 +9,49 @@ import '../../domain/entities/news_entity.dart';
 class NewsCubit extends Cubit<NewsStates> {
   final NewsUseCase newsUseCase;
   List<String> newsCategories = [
-    'General',
+    'webdev',
     'Business',
-    'Technology',
-    'Entertainment',
-    'Health',
-    'Science',
-    'Sports'
+    'programming',
+    'productivity',
+    'machinelearning',
+    'mobile',
+    'blockchain',
+    'laravel',
+    'flutter',
+    'startup',
+    'gamedev',
+    'performance',
+    'cryptocurrency',
   ];
+  String? currentCategory;
 
   NewsCubit({required this.newsUseCase}) : super(NewsInitState());
 
   static NewsCubit get(context) => BlocProvider.of(context);
 
   // fetching news data
-  Future<void> fetchNews() async {
+  Future<void> fetchNews(String? category) async {
     try {
       emit(NewsLoadingState());
 
-      final List<NewsEntity> newsData = await newsUseCase.getNews();
+      final List<NewsEntity> newsData = await newsUseCase.getNews(category);
 
       emit(NewsLoadedState(newsData));
     } catch (error) {
       emit(NewsErrorState('Fetching news error: $error'));
     }
+  }
+
+  // change category
+
+  void changeCategory(String? category){
+    // change articles category
+    currentCategory = category;
+
+    // inject a state change
+    emit(NewsCategoryStateChangedState());
+
+    // fetch new articles based on the selected category
+    fetchNews(category);
   }
 }

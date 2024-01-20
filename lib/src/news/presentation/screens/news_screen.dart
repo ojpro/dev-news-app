@@ -15,7 +15,7 @@ class NewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<NewsCubit>(
-      create: (context) => getIt()..fetchNews(),
+      create: (context) => getIt()..fetchNews(null),
       child: BlocConsumer<NewsCubit, NewsStates>(
         listener: (context, state) {},
         builder: (context, state) {
@@ -38,8 +38,25 @@ class NewsScreen extends StatelessWidget {
                     height: 40,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) =>
-                          badgeComponent(text: newsCubit.newsCategories[index]),
+                      itemBuilder: (context, index) {
+                        bool isSelected = newsCubit.newsCategories[index] ==
+                            newsCubit.currentCategory;
+                        return GestureDetector(
+                          child: badgeComponent(
+                            text: newsCubit.newsCategories[index],
+                            isSelected: isSelected,
+                          ),
+                          onTap: () {
+                            // toggle select state
+                            if (isSelected) {
+                              newsCubit.changeCategory(null);
+                            } else {
+                              newsCubit.changeCategory(
+                                  newsCubit.newsCategories[index]);
+                            }
+                          },
+                        );
+                      },
                       separatorBuilder: (context, index) => const SizedBox(
                         width: 4,
                       ),
@@ -66,8 +83,13 @@ class NewsScreen extends StatelessWidget {
                         itemCount: news.length,
                       ),
                     ),
-                    fallback: (BuildContext context) => const Center(
-                      child: CircularProgressIndicator(),
+                    fallback: (BuildContext buildContext) => SizedBox(
+                      height: MediaQuery.of(context).size.height / 1.2,
+                      width: MediaQuery.of(context).size.width,
+                      child: const Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [CircularProgressIndicator()],
+                      ),
                     ),
                   )
                 ],

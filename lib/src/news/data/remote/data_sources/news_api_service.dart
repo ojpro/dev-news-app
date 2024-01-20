@@ -5,12 +5,13 @@ class NewsApiService {
 
   NewsApiService(this.dioHelper);
 
-  Future<Response<dynamic>?> getNews() async {
+  Future<Response<dynamic>?> getNews(String? category) async {
     try {
       return await dioHelper.get(
         '/articles',
         queryParameters: {
-          'top': 30
+          'top': 30,
+          'tag': category,
         }
       );
     } catch (error) {

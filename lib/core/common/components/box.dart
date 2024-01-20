@@ -9,6 +9,8 @@ Widget boxComponent({
   double? width,
   double? height,
   DecorationImage? backgroundImage,
+  double borderWidth = 0,
+  Color borderColor = Colors.transparent,
 }) =>
     Container(
       width: width,
@@ -18,6 +20,10 @@ Widget boxComponent({
         boxShadow: boxShadow,
         color: backgroundColor,
         image: backgroundImage,
+        border: Border.all(
+          width: borderWidth,
+          color: borderColor,
+        ),
         borderRadius: BorderRadius.circular(
           borderRadius,
         ),

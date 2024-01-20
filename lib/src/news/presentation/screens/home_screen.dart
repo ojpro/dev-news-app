@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        AppCubit newsCubit = AppCubit.get(context);
+        AppCubit appCubit = AppCubit.get(context);
         return BasicLayout(
           title: 'News App',
           actions: [
@@ -40,15 +40,16 @@ class HomeScreen extends StatelessWidget {
                 Icons.settings_rounded,
               ),
               onPressed: () {
-                newsCubit.changeScreen(SettingsScreen());
+                appCubit.changeScreen(SettingsScreen());
               },
             ),
           ],
           bottomNavigationBarItems: _bottomNavigationItems(),
           onBottomNavBarTapPressed: (index) {
-            newsCubit.changeCurrentScreenId(index);
+            appCubit.changeCurrentScreenId(index);
           },
-          child: bottomNavBarScreens[newsCubit.currentScreenId],
+          bottomNavigationBarCurrentIndex: appCubit.currentScreenId,
+          child: bottomNavBarScreens[appCubit.currentScreenId],
         );
       },
     );

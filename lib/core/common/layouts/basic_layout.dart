@@ -10,6 +10,7 @@ class BasicLayout extends StatelessWidget {
   final List<BottomNavigationBarItem>? bottomNavigationBarItems;
   Function(int)? onBottomNavBarTapPressed;
   final bool? centerTitle;
+  final int? bottomNavigationBarCurrentIndex;
 
 
   BasicLayout({
@@ -21,6 +22,7 @@ class BasicLayout extends StatelessWidget {
     this.bottomNavigationBarItems,
     this.onBottomNavBarTapPressed,
     this.centerTitle = false,
+    this.bottomNavigationBarCurrentIndex,
   });
 
   @override
@@ -40,6 +42,7 @@ class BasicLayout extends StatelessWidget {
           bottomNavigationBar: bottomNavigationBarItems == null
               ? null
               : BottomNavigationBarComponent(
+                  currentIndex: bottomNavigationBarCurrentIndex ?? 0,
                   onTapPressed: (index) => onBottomNavBarTapPressed!(index),
                   items: bottomNavigationBarItems ?? [],
                 ),

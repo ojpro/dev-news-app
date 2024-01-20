@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news_app/core/bloc/app_cubit.dart';
 
 class BottomNavigationBarComponent extends StatelessWidget {
   final List<BottomNavigationBarItem> items;
@@ -18,7 +16,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
   const BottomNavigationBarComponent({
     super.key,
     required this.items,
-    this.currentIndex = 0,
+    required this.currentIndex,
     this.elevation = 0.0,
     this.enableFeedback = false,
     this.backgroundColor,
@@ -32,7 +30,6 @@ class BottomNavigationBarComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppCubit newsCubit = context.read<AppCubit>();
 
     return BottomNavigationBar(
       elevation: elevation,
@@ -42,7 +39,7 @@ class BottomNavigationBarComponent extends StatelessWidget {
       unselectedItemColor: unselectedItemColor,
       selectedItemColor: selectedItemColor,
       iconSize: iconSize,
-      currentIndex: newsCubit.currentScreenId,
+      currentIndex: currentIndex,
       enableFeedback: enableFeedback,
       items: items,
       onTap: (index) => onTapPressed(index) ?? (index) {},

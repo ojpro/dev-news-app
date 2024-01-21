@@ -10,7 +10,6 @@ class NewsCubit extends Cubit<NewsStates> {
   final NewsUseCase newsUseCase;
   List<String> newsCategories = [
     'webdev',
-    'Business',
     'programming',
     'productivity',
     'machinelearning',

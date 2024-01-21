@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/core/bloc/app_states.dart';
+import 'package:news_app/core/services/cache_helper.dart';
 
 class AppCubit extends Cubit<AppStates> {
   // Properties
   int currentScreenId = 0;
-  bool isDarkEnabled = true;
+  bool isDarkEnabled = false;
 
   // Class Related Methods
   AppCubit() : super(AppInitState());
@@ -24,8 +25,12 @@ class AppCubit extends Cubit<AppStates> {
   }
 
   // Change App Theme
-  void changeTheme(bool enabledDark) {
-    isDarkEnabled = enabledDark;
-    emit(AppThemeChangedState());
+  void changeTheme(bool? enabledDark) {
+    isDarkEnabled = enabledDark ?? isDarkEnabled;
+
+    // store the selected theme locally
+    CacheHelper.putBool('isDark', enabledDark).then(
+      (_) => emit(AppThemeChangedState()),
+    );
   }
 }

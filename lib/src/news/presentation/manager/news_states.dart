@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:news_app/src/news/domain/entities/news_entity.dart';
 

@@ -7,6 +7,7 @@ import 'core/common/states/bloc_observer.dart';
 import 'di.dart';
 
 Future<void> main() async {
+  // ensure everything is done before running the app
   WidgetsFlutterBinding.ensureInitialized();
 
   Bloc.observer = AppBlocObserver();

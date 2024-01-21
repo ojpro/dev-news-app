@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news_app/di.dart';
 import 'package:news_app/src/news/presentation/manager/news_cubit.dart';
 import 'package:news_app/src/news/presentation/manager/news_states.dart';
+import 'package:news_app/src/news/presentation/screens/webview_screen.dart';
 import 'package:news_app/src/news/presentation/widgets/badge.dart';
 import 'package:news_app/src/news/presentation/widgets/news_card.dart';
 
+import '../../../../core/bloc/app_cubit.dart';
 import '../../domain/entities/news_entity.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -63,24 +65,32 @@ class NewsScreen extends StatelessWidget {
                 ),
                 ConditionalBuilder(
                   condition: state is NewsLoadedState,
-                  builder: (context) => Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 6, vertical: 6),
-                    child: ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemBuilder: (context, index) {
-                        return newsCardComponent(
-                          title: news[index].title,
-                          imageUrl: news[index].coverImage ?? '',
-                          publishedAt: news[index].publishedAt,
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                          const SizedBox(height: 12),
-                      itemCount: news.length,
-                    ),
-                  ),
+                  builder: (context) {
+                    AppCubit appCubit = context.read<AppCubit>();
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 6, vertical: 6),
+                      child: ListView.separated(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return GestureDetector(
+                            onTap: (){
+                              appCubit.changeScreen(WebViewScreen(title: news[index].title, url: news[index].url,));
+                            },
+                            child: newsCardComponent(
+                              title: news[index].title,
+                              imageUrl: news[index].coverImage ?? '',
+                              publishedAt: news[index].publishedAt,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) =>
+                        const SizedBox(height: 12),
+                        itemCount: news.length,
+                      ),
+                    );
+                  },
                   fallback: (BuildContext buildContext) => SizedBox(
                     height: MediaQuery.of(context).size.height / 1.2,
                     width: MediaQuery.of(context).size.width,

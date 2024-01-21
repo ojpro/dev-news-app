@@ -24,76 +24,73 @@ class NewsScreen extends StatelessWidget {
           if (state is NewsLoadedState) {
             news = state.props.whereType<NewsEntity>().toList();
           }
-          return Expanded(
-            child: SingleChildScrollView(
-              // TODO: fix the scroll related issue from the console
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
-                    height: 40,
+          return SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+                  height: 40,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemBuilder: (context, index) {
+                      bool isSelected = newsCubit.newsCategories[index] ==
+                          newsCubit.currentCategory;
+                      return GestureDetector(
+                        child: badgeComponent(
+                          text: newsCubit.newsCategories[index],
+                          isSelected: isSelected,
+                        ),
+                        onTap: () {
+                          // toggle select state
+                          if (isSelected) {
+                            newsCubit.changeCategory(null);
+                          } else {
+                            newsCubit.changeCategory(
+                                newsCubit.newsCategories[index]);
+                          }
+                        },
+                      );
+                    },
+                    separatorBuilder: (context, index) => const SizedBox(
+                      width: 4,
+                    ),
+                    itemCount: newsCubit.newsCategories.length,
+                  ),
+                ),
+                ConditionalBuilder(
+                  condition: state is NewsLoadedState,
+                  builder: (context) => Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 6, vertical: 6),
                     child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) {
-                        bool isSelected = newsCubit.newsCategories[index] ==
-                            newsCubit.currentCategory;
-                        return GestureDetector(
-                          child: badgeComponent(
-                            text: newsCubit.newsCategories[index],
-                            isSelected: isSelected,
-                          ),
-                          onTap: () {
-                            // toggle select state
-                            if (isSelected) {
-                              newsCubit.changeCategory(null);
-                            } else {
-                              newsCubit.changeCategory(
-                                  newsCubit.newsCategories[index]);
-                            }
-                          },
+                        return newsCardComponent(
+                          title: news[index].title,
+                          imageUrl: news[index].coverImage ?? '',
+                          publishedAt: news[index].publishedAt,
                         );
                       },
-                      separatorBuilder: (context, index) => const SizedBox(
-                        width: 4,
-                      ),
-                      itemCount: newsCubit.newsCategories.length,
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(height: 12),
+                      itemCount: news.length,
                     ),
                   ),
-                  ConditionalBuilder(
-                    condition: state is NewsLoadedState,
-                    builder: (context) => Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 6, vertical: 6),
-                      child: ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (context, index) {
-                          return newsCardComponent(
-                            title: news[index].title,
-                            imageUrl: news[index].coverImage ?? '',
-                            publishedAt: news[index].publishedAt,
-                          );
-                        },
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(height: 12),
-                        itemCount: news.length,
-                      ),
+                  fallback: (BuildContext buildContext) => SizedBox(
+                    height: MediaQuery.of(context).size.height / 1.2,
+                    width: MediaQuery.of(context).size.width,
+                    child: const Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [CircularProgressIndicator()],
                     ),
-                    fallback: (BuildContext buildContext) => SizedBox(
-                      height: MediaQuery.of(context).size.height / 1.2,
-                      width: MediaQuery.of(context).size.width,
-                      child: const Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [CircularProgressIndicator()],
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                  ),
+                ),
+              ],
             ),
           );
         },

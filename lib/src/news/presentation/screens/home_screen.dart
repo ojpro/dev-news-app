@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         AppCubit appCubit = AppCubit.get(context);
         return BasicLayout(
-          title: 'News App',
+          title: 'Dev App',
           actions: [
             IconButton(
               icon: const Icon(
